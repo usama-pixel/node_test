@@ -268,6 +268,7 @@ const solution = () => {
   }
   inspectVar("solution", calculations.deliveryRoutes);
   log("end of solution");
+  return calculations.deliveryRoutes;
 };
 
 
