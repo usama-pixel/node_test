@@ -160,16 +160,44 @@ const solution = () => {
             }
           });
 
-        }
-        calculations.currentRoute[0].path = distances[0].elements[index].distance.text + ' from Store to ' + data.customers[index];
-        calculations.prevDistance = distances[0].elements[index].distance.value;
 
-        calculations.deliveryRoutes.push(
-          {
-            totalLength: distances[0].elements[index].distance.text + 'from store',
-            route: calculations.currentRoute,
-          }
-        );
+          calculations.currentRoute[0].path = distances[0].elements[index].distance.text + ' from Store to ' + data.customers[index];
+          calculations.prevDistance = distances[0].elements[index].distance.value;
+
+          calculations.deliveryRoutes.push(
+            {
+              totalLength: distances[0].elements[index].distance.text + 'from store',
+              route: calculations.currentRoute,
+            }
+          );
+        }
+        else {
+          let minDist = 0;
+          let indxItm = 0;
+          const indxToDelete = data.customers.indexOf(
+            calculations.deliveryRoutes[calculations.deliveryRoutes.length - 1]
+              .route[calculations.deliveryRoutes[0].route.length - 1].customer
+          );
+          distances[
+            data.customers.indexOf(
+              calculations.deliveryRoutes[
+                calculations.deliveryRoutes.length - 1
+              ].route[calculations.deliveryRoutes[0].route.length - 1].customer
+            ) + 1
+          ].elements.forEach((itm, indx) => {
+            if (indxToDelete !== indx) {
+              if (minDist === 0) {
+                minDist = itm.distance.value;
+                indxItm = indx;
+              } else if (itm.distance.value < minDist) {
+                minDist = itm.distance.value;
+                indxItm = indx;
+              }
+            }
+          });
+
+        }
+
       } else {
 
         // Increment the number of routes assigned
