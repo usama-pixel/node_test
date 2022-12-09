@@ -195,7 +195,35 @@ const solution = () => {
               }
             }
           });
+          // 
+          const dist = distances[
+            data
+              .customers.indexOf(
+                calculations.deliveryRoutes[calculations.deliveryRoutes.length - 1]
+                  .route[calculations.deliveryRoutes[0].route.length - 1]
+                  .customer) + 1].elements[indxItm].distance.text
+          const origin = calculations
+            .deliveryRoutes[calculations.deliveryRoutes.length - 1]
+            .route[calculations.deliveryRoutes[0].route.length - 1]
+            .customer
+          const dest = data.customers[indxItm]
 
+          const path = `${dist} from ${origin} to ${dest}`;
+
+          const newDist =
+            distances[
+              data.customers.indexOf(
+                calculations.deliveryRoutes[
+                  calculations.deliveryRoutes.length - 1
+                ].route[calculations.deliveryRoutes[0].route.length - 1]
+                  .customer) + 1].elements[indxItm].distance.value;
+          calculations
+            .deliveryRoutes[calculations.deliveryRoutes.length - 1]
+            .route.push({
+              customer: data.customers[indxItm],
+              deliveryCharges: newDist !== 0 ? 2 : 1,
+              path: path,
+            });
         }
 
       } else {
