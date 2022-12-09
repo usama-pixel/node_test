@@ -161,7 +161,15 @@ const solution = () => {
           });
 
         }
+        calculations.currentRoute[0].path = distances[0].elements[index].distance.text + ' from Store to ' + data.customers[index];
+        calculations.prevDistance = distances[0].elements[index].distance.value;
 
+        calculations.deliveryRoutes.push(
+          {
+            totalLength: distances[0].elements[index].distance.text + 'from store',
+            route: calculations.currentRoute,
+          }
+        );
       } else {
 
         // Increment the number of routes assigned
